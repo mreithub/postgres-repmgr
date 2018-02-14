@@ -26,7 +26,7 @@ if [ "${is_reg}" != "1" ] && [ ${my_node} -gt 1 ]; then
     pg_ctl -D "$PGDATA" stop -m fast
     rm -Rf "$PGDATA"/*
     repmgr -h "$PRIMARY_NODE" -U "$REPMGR_USER" -d "$REPMGR_DB" standby clone --fast-checkpoint
-    pg_ctl -D "$PGDATA" start &
+    pg_ctl -D "$PGDATA" -o '-c hot_standby=off' start &
     sleep 1
     repmgr -h "$PRIMARY_NODE" -U "$REPMGR_USER" -d "$REPMGR_DB" standby register    
 fi
