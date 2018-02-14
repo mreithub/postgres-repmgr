@@ -29,3 +29,4 @@ COPY scripts/*.sh /docker-entrypoint-initdb.d/
 VOLUME /home/postgres/
 VOLUME /var/lib/postgresql/data/
 
+CMD [ "postgres", "-c", "config_file=/etc/postgresql/postgresql.conf" ]
