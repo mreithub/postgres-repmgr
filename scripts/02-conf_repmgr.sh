@@ -19,7 +19,7 @@ installed=$(psql -qAt -h "$PGHOST" -U "$REPMGR_USER" "$REPMGR_DB" -c "SELECT 1 F
 my_node=1
  
 if [ "${installed}" == "1" ]; then
-    my_node=$(psql -qAt -h "$PGHOST" -U "$REPMGR_USER" "$REPMGR_DB" -c 'SELECT max(node_id)+1 FROM nodes')
+    my_node=$(psql -qAt -h "$PGHOST" -U "$REPMGR_USER" "$REPMGR_DB" -c 'SELECT max(node_id)+1 FROM repmgr.nodes')
 fi
 
 # allow the user to specify the hostname/IP for this node
