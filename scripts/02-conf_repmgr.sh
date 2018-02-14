@@ -32,6 +32,10 @@ node_id=${my_node}
 node_name=$(hostname -s | sed 's/\W\{1,\}/_/g;')
 conninfo=host='$NODE_HOST' user='$REPMGR_USER' dbname='$REPMGR_DB' connect_timeout=5
 data_directory=${PGDATA}
+
+log_level=INFO
+log_facility=STDERR
+log_status_interval=300
  
 pg_bindir=/usr/lib/postgresql/10/bin
 use_replication_slots=1
