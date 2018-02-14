@@ -23,7 +23,7 @@ RUN cd /root/pg_recall/; make install
 RUN mkdir -p /home/postgres/; chown postgres:postgres /home/postgres/
 
 COPY postgresql.conf /etc/postgresql/
-COPY docker-entrypoint.sh /
+COPY docker-entrypoint.sh /usr/local/bin/
 COPY scripts/*.sh /docker-entrypoint-initdb.d/
 
 VOLUME /home/postgres/

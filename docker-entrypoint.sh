@@ -140,9 +140,14 @@ if [ "$1" = 'postgres' ]; then
 		echo 'PostgreSQL init process complete; ready for start up.'
 		echo
 	fi
-
-	# start repmgrd (in the background)
-	(sleep 10; repmgrd --verbose --config-file=/etc/repmgr.conf) &
 fi
 
-exec "$@"
+if [ "$1" = postgres ]; then
+	echo "~~ starting PostgreSQL+repmgr..." >&2
+	# TODO maybe we should use pg_ctl here (this way the user can pass commandline arguments to postgres though)
+	"$@" &
+	sleep 1	
+	repmgrd --verbose
+else 
+	exec "$@"
+fi
